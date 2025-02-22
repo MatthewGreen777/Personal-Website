@@ -1,0 +1,246 @@
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f4f4f4;
+    font-size: 20px; /* Base font size */
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 20px 30px;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; /* Aligns buttons to the right */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+/* Style for navigation links (blending into background) */
+.nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ddd;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    width: 180px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #666;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background: #555;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Divider between buttons */
+.divider {
+    width: 2px;
+    height: 20px;
+    background: white;
+    margin: 0 15px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: auto; /* Adjust height to fit content */
+    width: 100%;
+}
+
+.back-button {
+    display: flex;
+    align-items: left;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 3em;
+    color: #007bff;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 3em; /* Increase the size of the website name */
+    position: relative;
+}
+
+.movie-main {
+    display: flex;
+    align-items: flex-start; /* Aligns items vertically to the start */
+    justify-content: flex-start; /* Align items to the start horizontally */
+}
+
+.origin-movie-poster {
+    width: 300px; /* Fixed width of the poster */
+    height: auto; /* Fixed height of the poster */
+    margin-bottom: 100px;
+    margin-left: 50px;
+    border-radius: 10px; /* Rounded corners */
+}
+
+.origin-movie-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.origin-movie-title {
+    font-size: 3em;
+    text-align: center; /* Center the text */
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.origin-movie-description {
+    font-size: 1.5em;
+    text-align: center; /* Space between description and poster */
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.origin-movie-etxra-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 50px;
+}
+
+.related-movies {
+    display: flex;
+    flex-direction: column; /* Stack title and movies vertically */
+    margin-left: 50px;
+}
+
+.related-movies-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    gap: 20px; /* Space between movie items */
+    margin-top: 20px;
+}
+
+.related-movie-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the items horizontally */
+    text-align: center; /* Center the text */
+}
+
+.related-movie-item img {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px; /* Rounded corners */
+}
+
+.related-movie-item h3 {
+    font-size: 2em;
+    margin-top: 10px;
+    text-align: center;
+    white-space: pre-wrap; /* Preserve whitespace */
+    overflow-wrap: break-word; /* Break long words */
+    max-width: 250px; /* Ensure title fits within the container */
+}
+
+.related-movie-button {
+    width: 200px;
+    height: auto;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Transition effect for hover */
+
+}
+
+.related-movie-button:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.related-movie-button img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* General Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode button {
+    color: #ffffff;
+    background-color: #121212;
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+    bottom: 20px;
+    right: 20px;
+    top: 20px;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #ddd;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#darkModeToggle:hover {
+    background-color: #bbb;
+    color: #fff;
+}

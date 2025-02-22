@@ -1,0 +1,213 @@
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f4f4f4;
+    font-size: 20px; /* Base font size */
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 20px 30px;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; /* Aligns buttons to the right */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+/* Style for navigation links (blending into background) */
+.nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ddd;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    width: 180px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #666;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background: #555;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Divider between buttons */
+.divider {
+    width: 2px;
+    height: 20px;
+    background: white;
+    margin: 0 15px;
+}
+
+h1 {
+    font-size: 3em; /* Increase the size of the website name */
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size:  2em; 
+    margin-bottom: 40px;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 400px; /* Increase the width of the search bar */
+    height: 40px; /* Increase the height of the search bar */
+    font-size: 18px; /* Increase the font size */
+    padding: 5px 10px;
+    border-radius: 10px; /* Rounded corners */
+}
+
+.search-bar button {
+    height: 54px;
+    font-size: 18px; /* Increase the button size to match the input */
+    padding: 5px 20px; /* Size of button */
+    border-radius: 10px; /* Rounded corners */
+}
+
+#randomButton {
+    margin-bottom: -5px;
+    width: 200px; /* Increase the width of the random button */
+    height: 50px;  /* Increase the height of the random button */
+    font-size: 20px; /* Increase the font size */
+    background-color: #ddd;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#randomButton:hover {
+    background-color: #bbb;
+}
+
+.genre-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+.genre-buttons button {
+    width: 175px; /* Reduced from 225px */
+    height: 250px; /* Reduced from 300px */
+    font-size: 25px; /* Reduced from 30px */
+    cursor: pointer;
+    background-color: #ddd;
+    border: 2px solid #ccc; /* Added border */
+    border-radius: 10px; /* Optional: rounded corners for the border */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Added transition for border color */
+    text-align: center;
+    line-height: 1.5; /* Reduced from 1.5 */
+}
+
+.genre-buttons button:hover {
+    background-color: #bbb;
+    border-color: #999; /* Change border color on hover */
+}
+
+button:hover {
+    background-color: #bbb;
+}
+
+
+/* General Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode input, 
+.dark-mode button {
+    color: #ffffff;
+    background-color: #333333;
+    border-color: #555555;
+}
+
+/* Dark Mode for Random Movie Button */
+body.dark-mode #randomButton {
+    background-color: #444;
+    color: #fff;
+    border-color: #666;
+}
+
+body.dark-mode #randomButton:hover {
+    background-color: #555;
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+    bottom: 20px;
+    right: 20px;
+    top: 20px;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #ddd;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#darkModeToggle:hover {
+    background-color: #bbb;
+    color: #fff;
+}

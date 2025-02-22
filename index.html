@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matthew Green - Personal Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li class="divider"></li>
+                <li class="dropdown">
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="discord-bot.html">Discord Bot</a></li>
+                        <li><a href="movie-recommender.html">Movie Recommender</a></li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li><a href="education.html" class="nav-link">Education</a></li>
+                <li class="divider"></li>
+                <li><a href="about-me.html" class="nav-link">About Me</a></li>
+            </ul>
+        </nav>
+    </header>    
+    
+    <section class="profile-section">
+        <div class="profile">
+            <img src="profile.jpg" alt="Matthew Green">
+            <div class="info">
+                <p>Matthew Green</p>
+                <p>Software Engineer</p>
+                <p>WorkWithMatthewGreen@gmail.com</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="projects">
+        <h2>Projects</h2>
+        <div class="project-container">
+            <div class="project-list">
+                <a href="discord-bot.html" class="project">Discord Bot</a>
+                <a href="movie-recommender.html" class="project">Movie Recommender</a>
+            </div>
+            <div class="scroll-buttons">
+                <button class="scroll-left">&#9664;</button>
+                <button class="scroll-right">&#9654;</button>
+            </div>
+        </div>
+    </section>
+        
+    <section class="education">
+        <h2>Education</h2>
+        <div class="education-container">
+            <div class="education-entry">
+                <h3>University of Maryland, Baltimore County</h3>
+                <p><strong>Degree Awarded:</strong> Master of Arts in Intercultural Communications</p>
+                <p><strong>Years Attended:</strong> 2022 - 2024</p>
+                
+                <p><strong><br>Degree Awarded:</strong> Bachelor of Science in Computer Science</p>
+                <p><strong>Years Attended:</strong> 2020 - 2024<br></p>
+                
+                <p><strong><br>Degree Awarded:</strong> Bachelor of Arts in Media and Communications</p>
+                <p><strong>Years Attended:</strong> 2020 - 2022</p>
+            </div>
+
+            <div class="education-entry">
+                <h3><br>Frederick Community College</h3>
+                <p><strong>Degree Awarded:</strong> Associate of Applied Science in General Studies</p>
+                <p><strong>Years Attended:</strong> 2017 - 2020</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="work">
+        <h2>Work History</h2>
+        <div class="work-container">
+            <div class="work-history">
+                <h4>Red Robin: 2020 - Present</h4>
+                <h5>Host/Server/Line Cook</h5>
+                <p>Facilitated comprehensive training and onboarding sessions for new team members, ensuring their seamless integration into the workforce and adherence to company standards</p>
+                <p>Delivered exceptional guest service by consistently upholding high-quality service standards, exceeding guest expectations and fostering a positive dining experience</p>
+                <p>Efficiently managed food packaging and distribution processes, ensuring accurate to-go customers, while maintaining food quality and safety standards</p>
+            </div>
+
+            <div class="work-history">
+                <h4>United States Postal Service: 2024 - 2024</h4>
+                <h5>Intern</h5>
+                <p>Created an engaging curriculum module to teach students about history and art through stamps, integrating interactive and educational content</p>
+                <p>Assisted in refining the social media strategy and outreach efforts, contributing to increased engagement and visibility for USPS Stamp Services</p>
+                <p>Participated in weekly product design meetings, providing constructive feedback to enhance stamp products</p>
+            </div>
+
+            <div class="work-history">
+                <h4>United States Department of Treasury: 2021 - 2021</h4>
+                <h5>Intern</h5>
+                <p>Conducted thorough document editing and revision, ensuring accuracy and complacence with departmental standards, contributing to streamlined communication and documentation process</p>
+                <p>Played a key role in the redesign of the department's website, actively participating in the planning, design, and implementation phases, enhance the user experience</p>
+                <p>Actively engaged in weekly departmental meetings, gaining valuable insights in the process the department uses</p>
+            </div>
+
+            <div class="work-history">
+                <h4>YMCA of Frederick County: 2020 - 2021</h4>
+                <h5>Child Care Aide</h5>
+                <p>Supervised children alongside the Site Director to ensure a safe and engaging environment</p>
+                <p>Managed child sign-in and sign-out procedures during drop-off and pick-up</p>
+                <p>Enforced COVID-19 policies to maintain health and safety standards</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+            <input type="email" id="email" placeholder="Your email" required>
+            <textarea id="message" placeholder="Your message" rows="4" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>    
+    
+    <script src="script.js"></script>
+</body>
+</html>
