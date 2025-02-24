@@ -22,21 +22,6 @@ const genres = [
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-menu");
-
-    // Toggle the active class when hamburger is clicked
-    hamburger.addEventListener("click", function () {
-        navMenu.classList.toggle("active");
-    });
-
-    // Close the nav menu if clicked outside
-    document.addEventListener("click", function (e) {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove("active");
-        }
-    });
-
     // Check if dark mode was previously enabled in localStorage
     if (localStorage.getItem('darkMode') === 'enabled') {
         document.body.classList.add('dark-mode');
@@ -120,3 +105,14 @@ function toggleDarkMode() {
         localStorage.setItem('darkMode', 'enabled');
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+});
