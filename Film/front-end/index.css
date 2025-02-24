@@ -225,18 +225,19 @@ body.dark-mode #randomButton:hover {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 60px; /* Make sure it starts below header */
+        top: 60px;
         left: 0;
         width: 100%;
         background: #333;
         text-align: center;
-        padding: 20px 0; /* Increased padding to cover the button */
-        z-index: 1; /* Ensure nav menu is above the hamburger */
+        padding: 20px 0;
+        z-index: 1;
     }
-
+    
     .nav-menu.active {
         display: flex;
     }
+    
 
     .nav-menu li {
         display: block;
@@ -250,7 +251,7 @@ body.dark-mode #randomButton:hover {
         font-size: 30px;
         color: white;
         cursor: pointer;
-        position: fixed;  
+        position: absolute;  
         top: 0px;       
         right: 20px;      
         z-index: 2;       
