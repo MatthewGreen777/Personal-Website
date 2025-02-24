@@ -68,15 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
 // Function to get a random movie
 function getRandomMovie() {
     fetch(`/random`)
         .then(response => response.json())
         .then(data => {
-            // Store the main movie details correctly in localStorage
             localStorage.setItem('selectedMovieDetails', JSON.stringify(data));
-            // Redirect to the result page
             window.location.href = 'result.html';
         })
         .catch(error => console.error('Error getting movies:', error));
@@ -87,12 +84,11 @@ function getMoviesByGenre(genreId, genreName) {
     fetch(`/genre-search?genre=${genreId}`)
         .then(response => response.json())
         .then(data => {
-            // Store the movie results and the selected genre in localStorage
             localStorage.setItem('movieResults', JSON.stringify(data.results));
-            localStorage.setItem('selectedGenre', genreName); // Save genre name
-            localStorage.setItem('currentPage', 1); // Save current page
-            localStorage.setItem('genreId', genreId); // Save genreId for pagination
-            window.location.href = 'genre.html'; // Navigate to the genre page
+            localStorage.setItem('selectedGenre', genreName);
+            localStorage.setItem('currentPage', 1);
+            localStorage.setItem('genreId', genreId);
+            window.location.href = 'genre.html';
         })
         .catch(error => console.error('Error fetching movies:', error));
 }
@@ -113,34 +109,11 @@ function searchMovie() {
 function toggleDarkMode() {
     const body = document.body;
     
-    // Check if dark mode is already active
     if (body.classList.contains('dark-mode')) {
-        // If dark mode is active, remove the class and return to light mode
         body.classList.remove('dark-mode');
-        // Remove dark mode from localStorage
         localStorage.setItem('darkMode', 'disabled');
     } else {
-        // If dark mode is not active, add the class and apply dark mode styles
         body.classList.add('dark-mode');
-        // Save dark mode to localStorage
         localStorage.setItem('darkMode', 'enabled');
     }
 }
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-menu");
-
-    // Toggle the active class when hamburger is clicked
-    hamburger.addEventListener("click", function () {
-        navMenu.classList.toggle("active");
-    });
-
-    // Close the nav menu if clicked outside
-    document.addEventListener("click", function (e) {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove("active");
-        }
-    });
-});
