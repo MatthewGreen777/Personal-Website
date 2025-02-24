@@ -244,3 +244,61 @@ body.dark-mode {
     background-color: #bbb;
     color: #fff;
 }
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    header {
+        display: fixed;
+        background: #333;
+        color: white;
+        padding: 30px 30px;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Make sure it starts below header */
+        left: 0;
+        width: 100%;
+        background: #333;
+        text-align: center;
+        padding: 20px 0; /* Increased padding to cover the button */
+        z-index: 1; /* Ensure nav menu is above the hamburger */
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        display: block;
+        padding: 10px 0;
+    }
+
+    .hamburger {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+        position: fixed;  
+        top: 0px;       
+        right: 20px;      
+        z-index: 2;       
+    } 
+
+    /* Ensure profile text appears below image */
+    .profile {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Hide hamburger button on larger screens */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+}
