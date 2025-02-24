@@ -21,32 +21,53 @@ const genres = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Check if dark mode was previously enabled in localStorage
+    // Dark Mode
     if (localStorage.getItem('darkMode') === 'enabled') {
         document.body.classList.add('dark-mode');
     }
 
     const genreButtonsContainer = document.getElementById('genre-buttons');
-    genres.forEach(genre => {
-        const button = document.createElement('button');
-        button.textContent = genre.name;
-        button.onclick = () => getMoviesByGenre(genre.id, genre.name);
-        genreButtonsContainer.appendChild(button);
-    });
-    
-    // Add event listener for the Enter key in the search input
-    const searchInput = document.getElementById('search');
-    searchInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') { // Check if the pressed key is Enter
-            event.preventDefault(); // Prevent the default form submission if it's inside a form
-            searchMovie(); // Call the search function
-        }
-    });
+    if (genreButtonsContainer) {
+        genres.forEach(genre => {
+            const button = document.createElement('button');
+            button.textContent = genre.name;
+            button.onclick = () => getMoviesByGenre(genre.id, genre.name);
+            genreButtonsContainer.appendChild(button);
+        });
+    }
 
-    // Dark Mode toggle button
-    document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+    const searchInput = document.getElementById('search');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                searchMovie();
+            }
+        });
+    }
+
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+
+    // Hamburger Menu
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove("active");
+            }
+        });
+    }
 });
+
 
 // Function to get a random movie
 function getRandomMovie() {
@@ -106,13 +127,20 @@ function toggleDarkMode() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
 
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    }
+document.addEventListener("DOMContentLoaded", function () {
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+
+    // Toggle the active class when hamburger is clicked
+    hamburger.addEventListener("click", function () {
+        navMenu.classList.toggle("active");
+    });
+
+    // Close the nav menu if clicked outside
+    document.addEventListener("click", function (e) {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove("active");
+        }
+    });
 });
