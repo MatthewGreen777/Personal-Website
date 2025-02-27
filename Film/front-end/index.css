@@ -212,6 +212,13 @@ body.dark-mode #randomButton:hover {
     color: #fff;
 }
 
+.copyright {
+    margin: 20px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
     header {
@@ -225,19 +232,18 @@ body.dark-mode #randomButton:hover {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 60px;
+        top: 60px; /* Make sure it starts below header */
         left: 0;
         width: 100%;
         background: #333;
         text-align: center;
-        padding: 20px 0;
-        z-index: 1;
+        padding: 20px 0; /* Increased padding to cover the button */
+        z-index: 1; /* Ensure nav menu is above the hamburger */
     }
-    
+
     .nav-menu.active {
         display: flex;
     }
-    
 
     .nav-menu li {
         display: block;
@@ -251,17 +257,50 @@ body.dark-mode #randomButton:hover {
         font-size: 30px;
         color: white;
         cursor: pointer;
-        position: absolute;  
+        position: fixed;  
         top: 0px;       
         right: 20px;      
         z-index: 2;       
     } 
+
+    .divider {
+        width: 100px;
+        height: 1px;
+        background: white;
+        transform: scaleY(0.25); /* Makes it appear thinner */
+        }
 
     /* Ensure profile text appears below image */
     .profile {
         flex-direction: column;
         text-align: center;
     }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 0; /* Aligns with the parent menu item */
+        left: 100%; /* Moves the submenu to the right of the main menu */
+        background: #444;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 5px;
+        width: 180px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Ensure dropdown displays properly */
+    .dropdown {
+        position: relative;
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
 }
 
 /* Hide hamburger button on larger screens */

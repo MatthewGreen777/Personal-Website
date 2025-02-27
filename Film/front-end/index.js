@@ -117,3 +117,5 @@ function toggleDarkMode() {
         localStorage.setItem('darkMode', 'enabled');
     }
 }
+
+document.getElementById("year").textContent = new Date().getFullYear();

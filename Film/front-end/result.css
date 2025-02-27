@@ -245,6 +245,13 @@ body.dark-mode {
     color: #fff;
 }
 
+.copyright {
+    margin: 20px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
     header {
@@ -289,11 +296,44 @@ body.dark-mode {
         z-index: 2;       
     } 
 
+    .divider {
+        width: 100px;
+        height: 1px;
+        background: white;
+        transform: scaleY(0.25); /* Makes it appear thinner */
+        }
+
     /* Ensure profile text appears below image */
     .profile {
         flex-direction: column;
         text-align: center;
     }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 0; /* Aligns with the parent menu item */
+        left: 100%; /* Moves the submenu to the right of the main menu */
+        background: #444;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 5px;
+        width: 180px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Ensure dropdown displays properly */
+    .dropdown {
+        position: relative;
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
 }
 
 /* Hide hamburger button on larger screens */

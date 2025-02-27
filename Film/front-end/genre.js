@@ -7,6 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dark-mode');
     }
 
+    // Hamburger Menu
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove("active");
+            }
+        });
+    }
+
     const resultsContainer = document.getElementById('Movie Details');
     const movieResults = JSON.parse(localStorage.getItem('movieResults'));
     const currentPage = parseInt(localStorage.getItem('currentPage')) || 1;
@@ -160,19 +176,4 @@ function toggleDarkMode() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-menu");
-
-    // Toggle the active class when hamburger is clicked
-    hamburger.addEventListener("click", function () {
-        navMenu.classList.toggle("active");
-    });
-
-    // Close the nav menu if clicked outside
-    document.addEventListener("click", function (e) {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove("active");
-        }
-    });
-});
+document.getElementById("year").textContent = new Date().getFullYear();
