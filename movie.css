@@ -92,6 +92,23 @@ header {
     margin: 0 15px;
 }
 
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.image img {
+    width: 500px; /* Fixed width */
+    height: auto;
+}
+
+.Project p {
+    padding-left: 24px;
+    text-align: left;
+}
+
 .copyright {
     margin: 20px;
     padding: 20px;
