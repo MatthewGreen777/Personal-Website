@@ -184,7 +184,7 @@ header {
     font-size: 24px;
 }
 
-.education-container, .work-container {
+.education-container, .work-container, .leadership-history {
     display: inline-block;
     text-align: left;
     max-width: 600px;
@@ -203,6 +203,23 @@ header {
 }
 
 .work-container p::before {
+    content: "•"; /* Bullet character */
+    position: absolute;
+    left: 0;
+    color: black; /* Adjust bullet color if needed */
+    font-size: 24px; /* Make the bullet slightly larger */
+}
+
+.leadership h4 {
+    font-size: 20px;
+}
+
+.leadership-history p {
+    position: relative;
+    padding-left: 20px; /* Space for the bullet */
+}
+
+.leadership-history p::before {
     content: "•"; /* Bullet character */
     position: absolute;
     left: 0;
