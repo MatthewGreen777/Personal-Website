@@ -1,0 +1,239 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #2E8B57;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 20px 30px;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; /* Aligns buttons to the right */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+/* Style for navigation links (blending into background) */
+.nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ddd;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    width: 180px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #666;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background: #555;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Divider between buttons */
+.divider {
+    width: 2px;
+    height: 20px;
+    background: white;
+    margin: 0 15px;
+}
+
+
+/* Layout for Player Areas */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px; /* Adds space between elements */
+}
+
+/* Player Row (Keeps Players on Top & Bottom) */
+.player-row {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+/* Individual Player */
+.player {
+    border: 2px solid white;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Trick Area - Centered WITHOUT Overlapping Players */
+#trick-area {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+    min-width: 250px;
+    text-align: center;
+    margin: 20px 0; /* Adds space above and below */
+}
+
+/* Scoreboard */
+#scoreboard {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* Cards */
+.card {
+    width: 80px;
+    height: auto;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.copyright {
+    margin: 20px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    header {
+        display: fixed;
+        background: #333;
+        color: white;
+        padding: 30px 30px;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Make sure it starts below header */
+        left: 0;
+        width: 100%;
+        background: #333;
+        text-align: center;
+        padding: 20px 0; /* Increased padding to cover the button */
+        z-index: 1; /* Ensure nav menu is above the hamburger */
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        display: block;
+        padding: 10px 0;
+    }
+
+    .hamburger {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+        position: fixed;  
+        top: 0px;       
+        right: 20px;      
+        z-index: 2;       
+    } 
+
+    .divider {
+        width: 100px;
+        height: 1px;
+        background: white;
+        transform: scaleY(0.25); /* Makes it appear thinner */
+        }
+
+    /* Ensure profile text appears below image */
+    .profile {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 0; /* Aligns with the parent menu item */
+        left: 100%; /* Moves the submenu to the right of the main menu */
+        background: #444;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 5px;
+        width: 180px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Ensure dropdown displays properly */
+    .dropdown {
+        position: relative;
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+}
+
+/* Hide hamburger button on larger screens */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+}
