@@ -212,11 +212,29 @@ function determineTrickWinner() {
     let winner = null;
 
     for (let entry of currentTrick) {
-        if (!highestCard ||
-            (entry.card.suit === leadingSuit && ranks.indexOf(entry.card.rank) > ranks.indexOf(highestCard.rank)) ||
-            (entry.card.suit === "spades" && highestCard.suit !== "spades")) {
+        if (!highestCard) {
             highestCard = entry.card;
             winner = entry.player;
+        } else {
+            // If current card is spades and previous highest is not spades, it wins
+            if (entry.card.suit === "spades" && highestCard.suit !== "spades") {
+                highestCard = entry.card;
+                winner = entry.player;
+            }
+            // If both cards are spades, the higher-ranked one wins
+            else if (entry.card.suit === "spades" && highestCard.suit === "spades") {
+                if (ranks.indexOf(entry.card.rank) > ranks.indexOf(highestCard.rank)) {
+                    highestCard = entry.card;
+                    winner = entry.player;
+                }
+            }
+            // If both are the leading suit, the higher-ranked one wins
+            else if (entry.card.suit === leadingSuit && highestCard.suit === leadingSuit) {
+                if (ranks.indexOf(entry.card.rank) > ranks.indexOf(highestCard.rank)) {
+                    highestCard = entry.card;
+                    winner = entry.player;
+                }
+            }
         }
     }
 
