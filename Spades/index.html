@@ -33,22 +33,30 @@
     <h1>Spades Game</h1>
 
     <div id="scoreboard"></div>
-
     <div id="game-container">
         <!-- Player Areas -->
-        <div class="player-row">
+        <div class="player-area" id="player-1-area">
             <div class="player" id="player-1">Player 1</div>
+            <div class="hand" id="player-1-hand"></div>
+        </div>
+    
+        <div class="player-area" id="player-2-area">
             <div class="player" id="player-2">Player 2</div>
+            <div class="hand" id="player-2-hand"></div>
         </div>
-
-        <!-- Trick Area in the Center -->
+    
         <div id="trick-area">Current Trick</div>
-
-        <div class="player-row">
+    
+        <div class="player-area" id="player-3-area">
             <div class="player" id="player-3">Player 3</div>
-            <div class="player" id="player-4">Player 4</div>
+            <div class="hand" id="player-3-hand"></div>
         </div>
-    </div>
+    
+        <div class="player-area" id="player-4-area">
+            <div class="player" id="player-4">Player 4</div>
+            <div class="hand" id="player-4-hand"></div>
+        </div>
+    </div>    
 
     <div id="bid-modal" class="modal">
         <div class="modal-content">

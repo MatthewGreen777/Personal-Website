@@ -259,13 +259,38 @@ function calculateScores() {
     let teamABid = players[0].bid + players[3].bid;
     let teamBBid = players[1].bid + players[2].bid;
 
-    let teamAPoints = (teamATricks >= teamABid) ? 
-        (teamABid * 10 + Math.max(0, teamATricks - teamABid)) : 
-        (-teamABid * 10); // Penalty for failing bid
+    let teamAPoints = 0;
+    let teamBPoints = 0;
 
-    let teamBPoints = (teamBTricks >= teamBBid) ? 
+    // Check for nil bids (0 bid)
+    for (let i of [0, 3]) {
+        if (players[i].bid === 0) {
+            if (players[i].tricksWon > 0) {
+                teamAPoints -= 100; // Penalty for failing nil
+            } else {
+                teamAPoints += 100; // Reward for successful nil
+            }
+        }
+    }
+
+    for (let i of [1, 2]) {
+        if (players[i].bid === 0) {
+            if (players[i].tricksWon > 0) {
+                teamBPoints -= 100; // Penalty for failing nil
+            } else {
+                teamBPoints += 100; // Reward for successful nil
+            }
+        }
+    }
+
+    // Standard bid scoring
+    teamAPoints += (teamATricks >= teamABid) ? 
+        (teamABid * 10 + Math.max(0, teamATricks - teamABid)) : 
+        (-teamABid * 10);
+
+    teamBPoints += (teamBTricks >= teamBBid) ? 
         (teamBBid * 10 + Math.max(0, teamBTricks - teamBBid)) : 
-        (-teamBBid * 10); // Penalty for failing bid
+        (-teamBBid * 10);
 
     let teamABags = Math.max(0, teamATricks - teamABid);
     let teamBBags = Math.max(0, teamBTricks - teamBBid);
@@ -297,9 +322,12 @@ function calculateScores() {
 
 // Update scoreboard
 function updateScoreboard() {
+    let teamABid = players[0].bid + players[2].bid;
+    let teamBBid = players[1].bid + players[3].bid;
+
     document.getElementById("scoreboard").innerHTML = `
-        Team A: ${teamScores.A} points, Bags: ${teamBags.A} <br>
-        Team B: ${teamScores.B} points, Bags: ${teamBags.B}
+        Team A: ${teamScores.A} points, Bags: ${teamBags.A}, Bid: ${teamABid} <br>
+        Team B: ${teamScores.B} points, Bags: ${teamBags.B}, Bid: ${teamBBid}
     `;
 }
 
