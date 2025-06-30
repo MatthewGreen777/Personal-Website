@@ -36,81 +36,42 @@
 
     <section class="commands">
         <h1>Bot Commands</h1>
-        <h2>/add-upcoming-events</h2>
-        
-        <p>
-            Allows people with the "Club Officer" role to add events to be shown to the public. Adding events is done by entering the name of the event and the date in YYYY-MM-DD format. Events with past dates are automatically removed.
-        </p>
-
-        <h2>/club-games</h2>
-        <p>
-            Displays a list of board games owned by the club that can be brought and played during meetings.
-        </p>
-
-        <h2>/list-member-games</h2>
-        <p>
-            Retrieves a list of board games owned by a specific member. The user enters the member's Discord username, and if that member has set up their collection using the /set-owned-games command, their list will be displayed.
-        </p>
-
-        <h2>/price-is-right</h2>
-        <p>
-            Shows an image of a game, and users guess the MSRP price by entering the command again with a price guess. If a user guesses before a game is started, they will receive a warning. Games end after 1 minute if no guesses are made. Guesses within 5% of the actual price are considered correct.
-        </p>
-
-        <h2>/random-fact</h2>
-        <p>
-            Returns a random fact from a curated backend list.
-        </p>
-
-        <h2>/remove-upcoming-event</h2>
-        <p>
-            Allows "Club Officer" role members to remove events from the upcoming events list by entering the event name.
-        </p>
-
-        <h2>/rock-paper-scissors</h2>
-        <p>
-            Play Rock-Paper-Scissors against the bot. The bot’s choice is based on weighted probabilities. Enter your choice when using the command.
-        </p>
-
-        <h2>/roll-dice</h2>
-        <p>
-            Rolls multiple dice. The user specifies the number of dice and how many sides each die has. Displays all roll results and the frequency of each outcome.
-        </p>
-
-        <h2>/roll-die</h2>
-        <p>
-            Rolls a single die. The user specifies how many sides the die should have and receives one random result.
-        </p>
-
-        <h2>/search-board-game</h2>
-        <p>
-            Searches for a board game by name and provides information including year of release, popularity rank on BoardGameGeek, number of ratings, average rating, playtime length, and complexity score.
-        </p>
-
-        <h2>/server</h2>
-        <p>
-            Displays the current number of members in the server.
-        </p>
-
-        <h2>/set-owned-games</h2>
-        <p>
-            Allows users to link their BoardGameGeek (BGG) account by entering their BGG username. This enables others to view the games they own via the /list-member-games command. The BGG username and Discord ID are saved for future searches.
-        </p>
-
-        <h2>/song-of-the-day</h2>
-        <p>
-            Lets "Club Officer" role members add a "Song of the Day." The user enters a date (YYYY-MM-DD) and either a song name or a link (YouTube, Spotify, Apple Music). The bot posts the song in a "song-of-the-day" channel at 5:17 UTC. If a date already has a song, new entries overwrite the previous one.
-        </p>
-
-        <h2>/upcoming-events</h2>
-        <p>
-            Lists all upcoming events sorted by date.
-        </p>
-
-        <h2>/user-most-played</h2>
-        <p>
-            Displays a list of a user's most played board games if they have linked their BoardGameGeek account using the /set-owned-games command.
-        </p>
+        <ul class="dropdown-commands">
+            <li class="dropdown">
+                <button class="toggle-dropdown">Officer Only Commands</button>
+                <ul class="command-dropdown-menu">
+                    <li>
+                        <strong>add-upcoming-events</strong><br>
+                        Allows people with the "Club Officer" role to add events.
+                    </li>
+                    <li>
+                        <strong>remove-upcoming-event</strong><br>
+                        Allows officers to remove events by name.
+                    </li>
+                    <li>
+                        <strong>song-of-the-day</strong><br>
+                        Lets officers post a song at a scheduled time.
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <button class="toggle-dropdown">Commands Anyone Can Use</button>
+                <ul class="command-dropdown-menu">
+                    <li><strong>club-games</strong><br>Displays a list of club-owned games.</li>
+                    <li><strong>list-member-games</strong><br>Shows a member's games if set up.</li>
+                    <li><strong>price-is-right</strong><br>Guess the MSRP of a board game.</li>
+                    <li><strong>random-fact</strong><br>Returns a random curated fact.</li>
+                    <li><strong>rock-paper-scissors</strong><br>Play against the bot.</li>
+                    <li><strong>roll-dice</strong><br>Rolls multiple dice and analyzes results.</li>
+                    <li><strong>roll-die</strong><br>Rolls a single die.</li>
+                    <li><strong>search-board-game</strong><br>Get info on board games.</li>
+                    <li><strong>server</strong><br>Shows current server population.</li>
+                    <li><strong>set-owned-games</strong><br>Link your BoardGameGeek account.</li>
+                    <li><strong>upcoming-events</strong><br>List future events.</li>
+                    <li><strong>user-most-played</strong><br>See your most played games.</li>
+                </ul>
+            </li>
+        </ul>
     </section>
 
     <section class="other">
@@ -118,7 +79,6 @@
         <p>Can see the code for this project at the following <a href="https://github.com/MatthewGreen777/discord-bot/tree/main">GitHub repository</a></p>
         <h1>Invite</h1>
         <p><a href="https://discord.com/oauth2/authorize?client_id=1319610315872403457&permissions=1708926688816768&integration_type=0&scope=bot">Invite</a> bot to a discord server to see how it works.</p>
-
     </section>
 
     <section class="Copyright">
@@ -126,6 +86,5 @@
     </section>
 
     <script src="discord-bot.js"></script>
-
 </body>
 </html>
