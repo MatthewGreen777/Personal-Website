@@ -1,0 +1,71 @@
+document.addEventListener("DOMContentLoaded", function () {
+    // --- Configurable site map ---
+    const siteMap = {
+        Home: "/index.html",
+        Projects: {
+            __link: "/Projects/projects-about.html",
+            "Discord Bot": "/Projects/Discord-Bot/index.html",
+            "Film": "/Projects/Film/index.html",
+            "Jeopardy": "/Projects/Jeopardy/index.html",
+            "Spades": "/Projects/Spades/index.html"
+        },
+        Education: "/Education/education.html",
+        "About Me": "/About-Me/about-me.html",
+        Reviews: {
+            __link: "/Reviews/index.html",
+            "Movie Reviews": "/Reviews/movies.html",
+            "Game Reviews": "/Reviews/games.html",
+            "Music Reviews": "/Reviews/shows.html"
+        }
+    };
+
+    // --- Insert Navigation ---
+    const header = document.querySelector("header");
+    header.innerHTML = `
+        <button class="hamburger">&#9776;</button>
+        <nav>
+            <ul class="nav-menu" id="nav-menu"></ul>
+        </nav>
+    `;
+
+    const navMenu = document.getElementById("nav-menu");
+
+    for (let [key, value] of Object.entries(siteMap)) {
+        let li = document.createElement("li");
+
+        if (typeof value === "string") {
+            li.innerHTML = `<a href="${value}" class="nav-link">${key}</a>`;
+        } else {
+            li.classList.add("dropdown");
+            const mainLink = value.__link || "#";
+            li.innerHTML = `<a href="${mainLink}" class="nav-link">${key}</a>`;
+            let dropdown = document.createElement("ul");
+            dropdown.classList.add("dropdown-menu");
+
+            for (let [subKey, subValue] of Object.entries(value)) {
+                if (subKey === "__link") continue;
+                dropdown.innerHTML += `<li><a href="${subValue}">${subKey}</a></li>`;
+            }
+
+            li.appendChild(dropdown);
+        }
+        navMenu.appendChild(li);
+        navMenu.innerHTML += `<li class="divider"></li>`;
+    }
+
+    // --- Mobile Nav ---
+    const hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
+
+    document.addEventListener("click", (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove("active");
+        }
+    });
+
+    // --- Footer Year (if present) ---
+    const yearEl = document.getElementById("year");
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
+});

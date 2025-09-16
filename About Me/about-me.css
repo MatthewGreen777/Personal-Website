@@ -1,0 +1,19 @@
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile img {
+    width: 300px; /* Fixed width */
+    height: auto;
+}
+
+.profile p {
+    padding-left: 24px;
+    text-align: left;
+}

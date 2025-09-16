@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Results</title>
+    <link rel="stylesheet" href="genre.css">
+</head>
+<body>
+    <header>
+        <button class="hamburger">&#9776;</button>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="../../index.html" class="nav-link">Home</a></li>
+                <li class="divider"></li>
+                <li class="dropdown">
+                    <a href="../../projects.html" class="nav-link">Projects</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../discord-bot.html">Discord Bot</a></li>
+                        <li><a href="../../movie-recommender.html">Movie Recommender</a></li>
+                        <li><a href="../../spades.html">Spades</a></li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li><a href="../../education.html" class="nav-link">Education</a></li>
+                <li class="divider"></li>
+                <li><a href="../../about-me.html" class="nav-link">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+          
+    <div class="container">
+        <h1><a href="index.html">Home Page</a></h1>
+        <h2 id="genreName">Genre Results</h2>
+        <div class="Movie Details" id="Movie Details">
+            <!-- Movie details will be dynamically generated here -->
+        </div>
+    </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button id="darkModeToggle">Toggle Dark Mode</button>
+
+    <section class="Copyright">
+        <p>Copyright &copy; Matthew Green <span id="year"></span></p>
+    </section>
+
+    <script src="genre.js"></script>
+</body>
+</html>

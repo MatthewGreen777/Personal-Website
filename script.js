@@ -1,34 +1,101 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const projectList = document.querySelector(".project-list");
-    const scrollLeftBtn = document.querySelector(".scroll-left");
-    const scrollRightBtn = document.querySelector(".scroll-right");
+    // --- Configurable site map ---
+    const siteMap = {
+        Home: "index.html",
+        Projects: {
+            __link: "Projects/projects-about.html", // link for main Projects button
+            "Discord Bot": "Projects/Discord-Bot/index.html",
+            "Film": "Projects/Film/index.html",
+            "Jeopardy": "Projects/Jeopardy/index.html",
+            "Spades": "Projects/Spades/index.html"
+        },
+        Education: "Education/education.html",
+        "About Me": "About Me/about-me.html",
+        Reviews: {
+            __link: "Reviews/index.html", // main Reviews page
+            "Movie Reviews": "Reviews/movies.html",
+            "Game Reviews": "Reviews/games.html",
+            "Music Reviews": "Reviews/shows.html"
+        }
+    };
 
-    const scrollAmount = 150; // Adjust based on project size
+    // --- Generate Navigation ---
+    const navMenu = document.getElementById("nav-menu");
+    for (let [key, value] of Object.entries(siteMap)) {
+        let li = document.createElement("li");
 
-    scrollLeftBtn.addEventListener("click", function () {
-        projectList.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    });
+        if (typeof value === "string") {
+            li.innerHTML = `<a href="${value}" class="nav-link">${key}</a>`;
+        } else {
+            li.classList.add("dropdown");
+            // Dropdown title links to its __link if provided
+            const mainLink = value.__link || "#";
+            li.innerHTML = `<a href="${mainLink}" class="nav-link">${key}</a>`;
+            let dropdown = document.createElement("ul");
+            dropdown.classList.add("dropdown-menu");
 
-    scrollRightBtn.addEventListener("click", function () {
-        projectList.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    });
-});
+            for (let [subKey, subValue] of Object.entries(value)) {
+                if (subKey === "__link") continue; // skip reserved property
+                dropdown.innerHTML += `<li><a href="${subValue}">${subKey}</a></li>`;
+            }
 
-document.addEventListener("DOMContentLoaded", function () {
+            li.appendChild(dropdown);
+        }
+        navMenu.appendChild(li);
+        navMenu.innerHTML += `<li class="divider"></li>`;
+    }
+
+    // --- Generate Projects Section ---
+    const projectList = document.getElementById("project-list");
+    for (let [project, link] of Object.entries(siteMap.Projects)) {
+        if (project === "__link") continue;
+        projectList.innerHTML += `<a href="${link}" class="project">${project}</a>`;
+    }
+
+    // --- Generate Reviews Section ---
+    const reviewList = document.getElementById("review-list");
+    for (let [review, link] of Object.entries(siteMap.Reviews)) {
+        if (review === "__link") continue;
+        reviewList.innerHTML += `<a href="${link}" class="review">${review}</a>`;
+    }
+
+    // --- Scroll Function (with looping) ---
+    function setupCarousel(listId, leftBtnId, rightBtnId) {
+        const list = document.getElementById(listId);
+        const leftBtn = document.getElementById(leftBtnId);
+        const rightBtn = document.getElementById(rightBtnId);
+        const scrollAmount = 150;
+
+        rightBtn.addEventListener("click", () => {
+            if (list.scrollLeft + list.clientWidth >= list.scrollWidth) {
+                list.scrollTo({ left: 0, behavior: "smooth" });
+            } else {
+                list.scrollBy({ left: scrollAmount, behavior: "smooth" });
+            }
+        });
+
+        leftBtn.addEventListener("click", () => {
+            if (list.scrollLeft <= 0) {
+                list.scrollTo({ left: list.scrollWidth, behavior: "smooth" });
+            } else {
+                list.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+            }
+        });
+    }
+
+    setupCarousel("project-list", "project-left", "project-right");
+    setupCarousel("review-list", "review-left", "review-right");
+
+    // --- Mobile Nav ---
     const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-menu");
+    hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
 
-    // Toggle the active class when hamburger is clicked
-    hamburger.addEventListener("click", function () {
-        navMenu.classList.toggle("active");
-    });
-
-    // Close the nav menu if clicked outside
-    document.addEventListener("click", function (e) {
+    document.addEventListener("click", (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             navMenu.classList.remove("active");
         }
     });
-});
 
-document.getElementById("year").textContent = new Date().getFullYear();
+    // --- Footer Year ---
+    document.getElementById("year").textContent = new Date().getFullYear();
+});
