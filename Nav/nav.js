@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // --- Configurable site map ---
     const siteMap = {
         Home: "/index.html",
         Projects: {
@@ -18,11 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
+    // --- Insert Navigation ---
     const header = document.querySelector("header");
-    if (!header) {
-        console.error("Header element not found.");
-        return;
-    }
     header.innerHTML = `
         <button class="hamburger">&#9776;</button>
         <nav>
@@ -31,10 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
     const navMenu = document.getElementById("nav-menu");
-    if (!navMenu) {
-        console.error("Navigation menu element not found.");
-        return;
-    }
 
     for (let [key, value] of Object.entries(siteMap)) {
         let li = document.createElement("li");
@@ -44,60 +38,48 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             li.classList.add("dropdown");
 
-            const mainLink = value.__link || "#";
-            li.innerHTML = `<a href="${mainLink}" class="nav-link dropdown-toggle">${key}</a>`;
+            // CHANGE: Make the parent link a non-navigable toggle
+            let mainLink = value.__link || "#";
+            li.innerHTML = `<a href="javascript:void(0)" class="nav-link dropdown-toggle">${key}</a>`;
 
+            // Dropdown items
             let dropdown = document.createElement("ul");
             dropdown.classList.add("dropdown-menu");
 
             for (let [subKey, subValue] of Object.entries(value)) {
                 if (subKey === "__link") continue;
-                const subLi = document.createElement("li");
-                subLi.innerHTML = `<a href="${subValue}">${subKey}</a>`;
-                dropdown.appendChild(subLi);
+                dropdown.innerHTML += `<li><a href="${subValue}">${subKey}</a></li>`;
             }
 
             li.appendChild(dropdown);
-
-            // This is the fix: Add a click listener to the dropdown parent
-            // to stop propagation and handle clicks correctly.
-            li.addEventListener('click', function(e) {
-                // Check if the click was on a dropdown link
-                const targetLink = e.target.closest('a');
-                if (targetLink && targetLink.classList.contains('dropdown-toggle')) {
-                    // Prevent the parent link from navigating
-                    e.preventDefault();
-                } else if (targetLink) {
-                    // Let the sub-link navigate normally
-                    return;
-                }
-                // Toggle the active class on the dropdown-menu for display
-                this.querySelector('.dropdown-menu').classList.toggle('show');
-            });
         }
 
         navMenu.appendChild(li);
-        const divider = document.createElement("li");
-        divider.classList.add("divider");
-        navMenu.appendChild(divider);
+        navMenu.innerHTML += `<li class="divider"></li>`;
     }
-    
-    // Hamburger menu logic
+
+    // --- Mobile Nav ---
     const hamburger = document.querySelector(".hamburger");
-    if (hamburger) {
-        hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
-    }
+    hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
+
+    // Add event listener to the dropdown toggle
+    document.querySelectorAll(".dropdown-toggle").forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevents navigation
+            const dropdownMenu = this.closest('.dropdown').querySelector('.dropdown-menu');
+            dropdownMenu.classList.toggle('show');
+        });
+    });
 
     // Close menu on outside click
     document.addEventListener("click", (e) => {
-        if (hamburger && navMenu && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             navMenu.classList.remove("active");
-            // Optional: Also hide any open dropdowns
             document.querySelectorAll('.dropdown-menu.show').forEach(menu => menu.classList.remove('show'));
         }
     });
 
-    // Footer Year (if present)
+    // --- Footer Year (if present) ---
     const yearEl = document.getElementById("year");
     if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
