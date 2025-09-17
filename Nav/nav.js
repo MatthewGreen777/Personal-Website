@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         Education: "/Education/education.html",
         "About Me": "/About-Me/about-me.html",
-
     };
 
     // --- Insert Navigation ---
@@ -39,9 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             li.classList.add("dropdown");
 
-            // CHANGE: Make the parent link a non-navigable toggle
+            // Use __link if available
             let mainLink = value.__link || "#";
-            li.innerHTML = `<a href="javascript:void(0)" class="nav-link dropdown-toggle">${key}</a>`;
+            li.innerHTML = `<a href="${mainLink}" class="nav-link dropdown-toggle">${key}</a>`;
 
             // Dropdown items
             let dropdown = document.createElement("ul");
@@ -63,12 +62,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamburger = document.querySelector(".hamburger");
     hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
 
-    // Add event listener to the dropdown toggle
+    // Dropdown toggle (mobile only)
     document.querySelectorAll(".dropdown-toggle").forEach(link => {
         link.addEventListener("click", function (e) {
-            e.preventDefault(); // Prevents navigation
-            const dropdownMenu = this.closest('.dropdown').querySelector('.dropdown-menu');
-            dropdownMenu.classList.toggle('show');
+            // Only apply toggle behavior if screen is small (mobile)
+            if (window.innerWidth <= 768) {
+                const dropdownMenu = this.closest('.dropdown').querySelector('.dropdown-menu');
+
+                // If dropdown already open, allow navigation
+                if (dropdownMenu.classList.contains('show')) {
+                    return; // let the link work
+                }
+
+                e.preventDefault(); // stop immediate navigation
+                dropdownMenu.classList.toggle('show');
+            }
         });
     });
 

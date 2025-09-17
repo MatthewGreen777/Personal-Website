@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         Education: "/Education/education.html",
         "About Me": "/About-Me/about-me.html",
-
     };
 
     // --- Insert Navigation ---
@@ -39,9 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             li.classList.add("dropdown");
 
-            // CHANGE: Make the parent link a non-navigable toggle
+            // FIX: use __link for parent link
             let mainLink = value.__link || "#";
-            li.innerHTML = `<a href="javascript:void(0)" class="nav-link dropdown-toggle">${key}</a>`;
+            li.innerHTML = `<a href="${mainLink}" class="nav-link dropdown-toggle">${key}</a>`;
 
             // Dropdown items
             let dropdown = document.createElement("ul");
@@ -64,6 +63,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const list = document.getElementById(listId);
         const leftBtn = document.getElementById(leftBtnId);
         const rightBtn = document.getElementById(rightBtnId);
+
+        // If any element is missing, skip
+        if (!list || !leftBtn || !rightBtn) return;
+
         const scrollAmount = 150;
 
         rightBtn.addEventListener("click", () => {
@@ -83,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Setup both carousels if present
     setupCarousel("project-list", "project-left", "project-right");
     setupCarousel("review-list", "review-left", "review-right");
 
@@ -90,12 +94,34 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamburger = document.querySelector(".hamburger");
     hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
 
+    // Dropdown toggle (mobile only)
+    document.querySelectorAll(".dropdown-toggle").forEach(link => {
+        link.addEventListener("click", function (e) {
+            if (window.innerWidth <= 768) {
+                const dropdownMenu = this.closest('.dropdown').querySelector('.dropdown-menu');
+
+                // If dropdown already open, allow navigation
+                if (dropdownMenu.classList.contains('show')) {
+                    return; // let the link navigate
+                }
+
+                e.preventDefault(); // stop immediate navigation
+                dropdownMenu.classList.toggle('show');
+            }
+        });
+    });
+
+    // Close menu on outside click
     document.addEventListener("click", (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             navMenu.classList.remove("active");
+            document.querySelectorAll('.dropdown-menu.show').forEach(menu => menu.classList.remove('show'));
         }
     });
 
-    // --- Footer Year ---
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // --- Footer Year (if present) ---
+    const yearEl = document.getElementById("year");
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
 });
