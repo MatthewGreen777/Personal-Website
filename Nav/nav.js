@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // --- Configurable site map ---
     const siteMap = {
         Home: "/index.html",
         Projects: {
@@ -19,8 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // --- Insert Navigation ---
     const header = document.querySelector("header");
+    if (!header) {
+        console.error("Header element not found.");
+        return;
+    }
     header.innerHTML = `
         <button class="hamburger">&#9776;</button>
         <nav>
@@ -29,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
     const navMenu = document.getElementById("nav-menu");
+    if (!navMenu) {
+        console.error("Navigation menu element not found.");
+        return;
+    }
 
     for (let [key, value] of Object.entries(siteMap)) {
         let li = document.createElement("li");
@@ -38,37 +44,60 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             li.classList.add("dropdown");
 
-            // Parent dropdown link
-            let mainLink = value.__link || "#";
-            li.innerHTML = `<a href="${mainLink}" class="nav-link">${key}</a>`;
+            const mainLink = value.__link || "#";
+            li.innerHTML = `<a href="${mainLink}" class="nav-link dropdown-toggle">${key}</a>`;
 
-            // Dropdown items
             let dropdown = document.createElement("ul");
             dropdown.classList.add("dropdown-menu");
 
             for (let [subKey, subValue] of Object.entries(value)) {
                 if (subKey === "__link") continue;
-                dropdown.innerHTML += `<li><a href="${subValue}">${subKey}</a></li>`;
+                const subLi = document.createElement("li");
+                subLi.innerHTML = `<a href="${subValue}">${subKey}</a>`;
+                dropdown.appendChild(subLi);
             }
 
             li.appendChild(dropdown);
+
+            // This is the fix: Add a click listener to the dropdown parent
+            // to stop propagation and handle clicks correctly.
+            li.addEventListener('click', function(e) {
+                // Check if the click was on a dropdown link
+                const targetLink = e.target.closest('a');
+                if (targetLink && targetLink.classList.contains('dropdown-toggle')) {
+                    // Prevent the parent link from navigating
+                    e.preventDefault();
+                } else if (targetLink) {
+                    // Let the sub-link navigate normally
+                    return;
+                }
+                // Toggle the active class on the dropdown-menu for display
+                this.querySelector('.dropdown-menu').classList.toggle('show');
+            });
         }
 
         navMenu.appendChild(li);
-        navMenu.innerHTML += `<li class="divider"></li>`;
+        const divider = document.createElement("li");
+        divider.classList.add("divider");
+        navMenu.appendChild(divider);
+    }
+    
+    // Hamburger menu logic
+    const hamburger = document.querySelector(".hamburger");
+    if (hamburger) {
+        hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
     }
 
-    // --- Mobile Nav ---
-    const hamburger = document.querySelector(".hamburger");
-    hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
-
+    // Close menu on outside click
     document.addEventListener("click", (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+        if (hamburger && navMenu && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             navMenu.classList.remove("active");
+            // Optional: Also hide any open dropdowns
+            document.querySelectorAll('.dropdown-menu.show').forEach(menu => menu.classList.remove('show'));
         }
     });
 
-    // --- Footer Year (if present) ---
+    // Footer Year (if present)
     const yearEl = document.getElementById("year");
     if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
