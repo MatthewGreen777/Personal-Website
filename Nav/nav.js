@@ -9,14 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
             "Jeopardy": "/Projects/Jeopardy/jeopardy-about.html",
             "Spades": "/Projects/Spades/spades-about.html"
         },
-        Education: "/Education/education.html",
-        "About Me": "/About-Me/about-me.html",
         Reviews: {
             __link: "/Reviews/reviews-about.html",
             "Movie Reviews": "/Reviews/Movies/movies.html",
             "Game Reviews": "/Reviews/Games/games.html",
             "Music Reviews": "/Reviews/Music/music.html"
-        }
+        },
+        Education: "/Education/education.html",
+        "About Me": "/About-Me/about-me.html",
+
     };
 
     // --- Insert Navigation ---

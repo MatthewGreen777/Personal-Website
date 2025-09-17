@@ -3,24 +3,34 @@ document.addEventListener("DOMContentLoaded", function () {
     const siteMap = {
         Home: "/index.html",
         Projects: {
-            __link: "/Projects/projects-about.html", // link for main Projects button
+            __link: "/Projects/projects-about.html",
             "Discord Bot": "/Projects/Discord-Bot/discord-bot-about.html",
             "Film": "/Projects/Film/movie-recommender-about.html",
             "Jeopardy": "/Projects/Jeopardy/jeopardy-about.html",
             "Spades": "/Projects/Spades/spades-about.html"
         },
-        Education: "/Education/education.html",
-        "About Me": "/About-Me/about-me.html",
         Reviews: {
-            __link: "/Reviews/reviews-about.html", // main Reviews page
+            __link: "/Reviews/reviews-about.html",
             "Movie Reviews": "/Reviews/Movies/movies.html",
             "Game Reviews": "/Reviews/Games/games.html",
             "Music Reviews": "/Reviews/Music/music.html"
-        }
+        },
+        Education: "/Education/education.html",
+        "About Me": "/About-Me/about-me.html",
+
     };
 
-    // --- Generate Navigation ---
+    // --- Insert Navigation ---
+    const header = document.querySelector("header");
+    header.innerHTML = `
+        <button class="hamburger">&#9776;</button>
+        <nav>
+            <ul class="nav-menu" id="nav-menu"></ul>
+        </nav>
+    `;
+
     const navMenu = document.getElementById("nav-menu");
+
     for (let [key, value] of Object.entries(siteMap)) {
         let li = document.createElement("li");
 
@@ -28,35 +38,25 @@ document.addEventListener("DOMContentLoaded", function () {
             li.innerHTML = `<a href="${value}" class="nav-link">${key}</a>`;
         } else {
             li.classList.add("dropdown");
-            // Dropdown title links to its __link if provided
-            const mainLink = value.__link || "#";
-            li.innerHTML = `<a href="${mainLink}" class="nav-link">${key}</a>`;
+
+            // CHANGE: Make the parent link a non-navigable toggle
+            let mainLink = value.__link || "#";
+            li.innerHTML = `<a href="javascript:void(0)" class="nav-link dropdown-toggle">${key}</a>`;
+
+            // Dropdown items
             let dropdown = document.createElement("ul");
             dropdown.classList.add("dropdown-menu");
 
             for (let [subKey, subValue] of Object.entries(value)) {
-                if (subKey === "__link") continue; // skip reserved property
+                if (subKey === "__link") continue;
                 dropdown.innerHTML += `<li><a href="${subValue}">${subKey}</a></li>`;
             }
 
             li.appendChild(dropdown);
         }
+
         navMenu.appendChild(li);
         navMenu.innerHTML += `<li class="divider"></li>`;
-    }
-
-    // --- Generate Projects Section ---
-    const projectList = document.getElementById("project-list");
-    for (let [project, link] of Object.entries(siteMap.Projects)) {
-        if (project === "__link") continue;
-        projectList.innerHTML += `<a href="${link}" class="project">${project}</a>`;
-    }
-
-    // --- Generate Reviews Section ---
-    const reviewList = document.getElementById("review-list");
-    for (let [review, link] of Object.entries(siteMap.Reviews)) {
-        if (review === "__link") continue;
-        reviewList.innerHTML += `<a href="${link}" class="review">${review}</a>`;
     }
 
     // --- Scroll Function (with looping) ---
