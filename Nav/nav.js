@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         Education: "/Education/education.html",
         "About Me": "/About-Me/about-me.html",
         Reviews: {
-            __link: "/Reviews/index.html",
+            __link: "/Reviews/reviews-about.html",
             "Movie Reviews": "/Reviews/Movies/movies.html",
             "Game Reviews": "/Reviews/Games/games.html",
             "Music Reviews": "/Reviews/Music/music.html"
@@ -34,17 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let li = document.createElement("li");
 
         if (typeof value === "string") {
-            // Ensure all direct links end with .html
-            let safeLink = value.endsWith(".html") ? value : `${value}.html`;
-            li.innerHTML = `<a href="${safeLink}" class="nav-link">${key}</a>`;
+            li.innerHTML = `<a href="${value}" class="nav-link">${key}</a>`;
         } else {
             li.classList.add("dropdown");
 
             // Parent dropdown link
-            let mainLink = value.__link && value.__link.endsWith(".html")
-                ? value.__link
-                : (value.__link || "#");
-
+            let mainLink = value.__link || "#";
             li.innerHTML = `<a href="${mainLink}" class="nav-link">${key}</a>`;
 
             // Dropdown items
@@ -53,9 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             for (let [subKey, subValue] of Object.entries(value)) {
                 if (subKey === "__link") continue;
-
-                let safeLink = subValue.endsWith(".html") ? subValue : `${subValue}.html`;
-                dropdown.innerHTML += `<li><a href="${safeLink}">${subKey}</a></li>`;
+                dropdown.innerHTML += `<li><a href="${subValue}">${subKey}</a></li>`;
             }
 
             li.appendChild(dropdown);
