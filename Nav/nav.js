@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Spades": "/Projects/Spades/spades-about.html"
         },
         Education: "/Education/education.html",
-        "About Me": "/About-Me/about-me.html",
+        "About Me": "/About Me/about-me.html",
         Reviews: {
             __link: "/Reviews/index.html",
             "Movie Reviews": "Reviews/Movies/movies.html",
