@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         Home: "/index.html",
         Projects: {
             __link: "/Projects/projects-about.html",
-            "Discord Bot": "/Projects/Discord-Bot/discord-bot.html",
+            "Discord Bot": "/Projects/Discord-Bot/discord-bot-about.html",
             "Film": "/Projects/Film/movie-recommender-about.html",
             "Jeopardy": "/Projects/Jeopardy/jeopardy-about.html",
             "Spades": "/Projects/Spades/spades-about.html"
