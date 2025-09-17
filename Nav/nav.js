@@ -4,18 +4,18 @@ document.addEventListener("DOMContentLoaded", function () {
         Home: "/index.html",
         Projects: {
             __link: "/Projects/projects-about.html",
-            "Discord Bot": "/Projects/Discord-Bot/index.html",
-            "Film": "/Projects/Film/index.html",
-            "Jeopardy": "/Projects/Jeopardy/index.html",
-            "Spades": "/Projects/Spades/index.html"
+            "Discord Bot": "/Projects/Discord-Bot/discord-bot.html",
+            "Film": "/Projects/Film/movie-recommender-about.html",
+            "Jeopardy": "/Projects/Jeopardy/jeopardy-about.html",
+            "Spades": "/Projects/Spades/spades-about.html"
         },
         Education: "/Education/education.html",
         "About Me": "/About-Me/about-me.html",
         Reviews: {
             __link: "/Reviews/index.html",
-            "Movie Reviews": "/Reviews/movies.html",
-            "Game Reviews": "/Reviews/games.html",
-            "Music Reviews": "/Reviews/shows.html"
+            "Movie Reviews": "Reviews/Movies/movies.html",
+            "Game Reviews": "Reviews/Games/games.html",
+            "Music Reviews": "Reviews/Music/music.html"
         }
     };
 
