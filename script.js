@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Spades": "Projects/Spades/spades-about.html"
         },
         Education: "Education/education.html",
-        "About Me": "About Me/about-me.html",
+        "About Me": "About-Me/about-me.html",
         Reviews: {
             __link: "Reviews/index.html", // main Reviews page
             "Movie Reviews": "Reviews/Movies/movies.html",
@@ -25,22 +25,32 @@ document.addEventListener("DOMContentLoaded", function () {
         let li = document.createElement("li");
 
         if (typeof value === "string") {
-            li.innerHTML = `<a href="${value}" class="nav-link">${key}</a>`;
+            // Make sure it always ends in .html
+            let safeLink = value.endsWith(".html") ? value : `${value}.html`;
+            li.innerHTML = `<a href="${safeLink}" class="nav-link">${key}</a>`;
         } else {
             li.classList.add("dropdown");
-            // Dropdown title links to its __link if provided
-            const mainLink = value.__link || "#";
+
+            // Parent dropdown link
+            let mainLink = value.__link
+                ? (value.__link.endsWith(".html") ? value.__link : `${value.__link}.html`)
+                : "#";
+
             li.innerHTML = `<a href="${mainLink}" class="nav-link">${key}</a>`;
+
+            // Dropdown items
             let dropdown = document.createElement("ul");
             dropdown.classList.add("dropdown-menu");
 
             for (let [subKey, subValue] of Object.entries(value)) {
-                if (subKey === "__link") continue; // skip reserved property
-                dropdown.innerHTML += `<li><a href="${subValue}">${subKey}</a></li>`;
+                if (subKey === "__link") continue;
+                let safeLink = subValue.endsWith(".html") ? subValue : `${subValue}.html`;
+                dropdown.innerHTML += `<li><a href="${safeLink}">${subKey}</a></li>`;
             }
 
             li.appendChild(dropdown);
         }
+
         navMenu.appendChild(li);
         navMenu.innerHTML += `<li class="divider"></li>`;
     }
@@ -49,14 +59,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const projectList = document.getElementById("project-list");
     for (let [project, link] of Object.entries(siteMap.Projects)) {
         if (project === "__link") continue;
-        projectList.innerHTML += `<a href="${link}" class="project">${project}</a>`;
+        let safeLink = link.endsWith(".html") ? link : `${link}.html`;
+        projectList.innerHTML += `<a href="${safeLink}" class="project">${project}</a>`;
     }
 
     // --- Generate Reviews Section ---
     const reviewList = document.getElementById("review-list");
     for (let [review, link] of Object.entries(siteMap.Reviews)) {
         if (review === "__link") continue;
-        reviewList.innerHTML += `<a href="${link}" class="review">${review}</a>`;
+        let safeLink = link.endsWith(".html") ? link : `${link}.html`;
+        reviewList.innerHTML += `<a href="${safeLink}" class="review">${review}</a>`;
     }
 
     // --- Scroll Function (with looping) ---

@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
             "Spades": "/Projects/Spades/spades-about.html"
         },
         Education: "/Education/education.html",
-        "About Me": "/About%Me/about-me.html",
+        "About Me": "/About-Me/about-me.html",
         Reviews: {
             __link: "/Reviews/index.html",
-            "Movie Reviews": "Reviews/Movies/movies.html",
-            "Game Reviews": "Reviews/Games/games.html",
-            "Music Reviews": "Reviews/Music/music.html"
+            "Movie Reviews": "/Reviews/Movies/movies.html",
+            "Game Reviews": "/Reviews/Games/games.html",
+            "Music Reviews": "/Reviews/Music/music.html"
         }
     };
 
@@ -34,21 +34,33 @@ document.addEventListener("DOMContentLoaded", function () {
         let li = document.createElement("li");
 
         if (typeof value === "string") {
-            li.innerHTML = `<a href="${value}" class="nav-link">${key}</a>`;
+            // Ensure all direct links end with .html
+            let safeLink = value.endsWith(".html") ? value : `${value}.html`;
+            li.innerHTML = `<a href="${safeLink}" class="nav-link">${key}</a>`;
         } else {
             li.classList.add("dropdown");
-            const mainLink = value.__link || "#";
+
+            // Parent dropdown link
+            let mainLink = value.__link && value.__link.endsWith(".html")
+                ? value.__link
+                : (value.__link || "#");
+
             li.innerHTML = `<a href="${mainLink}" class="nav-link">${key}</a>`;
+
+            // Dropdown items
             let dropdown = document.createElement("ul");
             dropdown.classList.add("dropdown-menu");
 
             for (let [subKey, subValue] of Object.entries(value)) {
                 if (subKey === "__link") continue;
-                dropdown.innerHTML += `<li><a href="${subValue}">${subKey}</a></li>`;
+
+                let safeLink = subValue.endsWith(".html") ? subValue : `${subValue}.html`;
+                dropdown.innerHTML += `<li><a href="${safeLink}">${subKey}</a></li>`;
             }
 
             li.appendChild(dropdown);
         }
+
         navMenu.appendChild(li);
         navMenu.innerHTML += `<li class="divider"></li>`;
     }
