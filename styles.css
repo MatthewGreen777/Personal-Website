@@ -32,7 +32,7 @@ header {
     position: relative;
 }
 
-/* Style for navigation links (blending into background) */
+/* Style for navigation links */
 .nav-link {
     text-decoration: none;
     color: white;
@@ -92,6 +92,7 @@ header {
     margin: 0 15px;
 }
 
+/* Profile Section */
 .profile {
     display: flex;
     align-items: center;
@@ -111,7 +112,8 @@ header {
     font-size: 24px;
 }
 
-.project-container {
+/* Project & Review Containers */
+.project-container, .review-container {
     display: flex;
     flex-direction: column; /* Stack elements vertically */
     align-items: center;
@@ -120,7 +122,7 @@ header {
     margin: 0 auto;
 }
 
-.project-list {
+.project-list, .review-list {
     display: flex;
     overflow: hidden;
     width: 320px;
@@ -128,13 +130,89 @@ header {
     gap: 20px;
 }
 
-.project {
+.project, .review {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 180px; 
+    height: 200px; 
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color: black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
+    cursor: pointer;
+}
+
+/* Inner content */
+.project .card-content, .review .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+}
+
+.project .card-content span, 
+.review .card-content span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+/* Hover effect */
+.project:hover, .review:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Shared Scroll Buttons */
+.scroll-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.scroll-left, .scroll-right {
+    width: 75px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: grey;
+    border: 1px solid black;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.scroll-left:hover, .scroll-right:hover {
+    background: darkgray;
+}
+
+
+/* Anchor makes whole card clickable */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Card styling */
+.card {
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
     width: 150px; 
-    height: 150px; 
+    height: 175px; 
     background: white;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -145,88 +223,26 @@ header {
     text-align: center;
 }
 
-.project:hover {
-    transform: scale(1.05);
-}
-
-/* Scroll buttons positioned below */
-.scroll-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.scroll-left, .scroll-right {
-    width: 75px; /* Square size */
-    height: 40px; /* Square size */
+/* Card content */
+.card-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: grey;
-    border: 1px solid black;
-    font-size: 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.scroll-left:hover, .scroll-right:hover {
-    background: darkgray;
-}
-
-.education, .work {
     text-align: center;
-    padding: 10px;
 }
 
-.education h3, .work h4 {
-    font-size: 24px;
+.card-content span {
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.education-container, .work-container, .leadership-history {
-    display: inline-block;
-    text-align: left;
-    max-width: 600px;
+/* Hover effect */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
 }
 
-.work h5 {
-    font-size: 22px;
-    margin-top: -20px; /* Reduce the top gap */
-    margin-bottom: -10px;
-    text-indent: 25px;
-}
-
-.work-container p {
-    position: relative;
-    padding-left: 20px; /* Space for the bullet */
-}
-
-.work-container p::before {
-    content: "•"; /* Bullet character */
-    position: absolute;
-    left: 0;
-    color: black; /* Adjust bullet color if needed */
-    font-size: 24px; /* Make the bullet slightly larger */
-}
-
-.leadership h4 {
-    font-size: 20px;
-}
-
-.leadership-history p {
-    position: relative;
-    padding-left: 20px; /* Space for the bullet */
-}
-
-.leadership-history p::before {
-    content: "•"; /* Bullet character */
-    position: absolute;
-    left: 0;
-    color: black; /* Adjust bullet color if needed */
-    font-size: 24px; /* Make the bullet slightly larger */
-}
-
+/* Contact Form */
 .contact {
     margin: 20px;
     padding: 20px;
@@ -243,24 +259,23 @@ form {
 input {
     padding: 10px;
     margin: 10px;
-    width: 300px; /* Fixed width */
+    width: 300px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 textarea {
-    width: 300px; /* Fixed width */
-    height: 250px; /* Fixed height */
-    resize: none; /* Prevents resizing */
+    width: 300px;
+    height: 250px;
+    resize: none;
     padding: 10px;
     margin: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-
 button {
-    width: 150px; /* Prevents resizing */
+    width: 150px;
     padding: 10px 20px;
     border: none;
     background: #333;
@@ -287,13 +302,13 @@ button:hover {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 60px; /* Make sure it starts below header */
+        top: 60px;
         left: 0;
         width: 100%;
         background: #333;
         text-align: center;
-        padding: 20px 0; /* Increased padding to cover the button */
-        z-index: 1; /* Ensure nav menu is above the hamburger */
+        padding: 20px 0;
+        z-index: 1;
     }
 
     .nav-menu.active {
@@ -322,21 +337,20 @@ button:hover {
         width: 100px;
         height: 1px;
         background: white;
-        transform: scaleY(0.25); /* Makes it appear thinner */
-        }
+        transform: scaleY(0.25);
+    }
 
-    /* Ensure profile text appears below image */
     .profile {
         flex-direction: column;
         text-align: center;
     }
 
-    /* Dropdown Menu */
+    /* Dropdown Menu Adjustments */
     .dropdown-menu {
         display: none;
         position: absolute;
-        top: 0; /* Aligns with the parent menu item */
-        left: 100%; /* Moves the submenu to the right of the main menu */
+        top: 0;
+        left: 100%;
         background: #444;
         list-style: none;
         padding: 0;
@@ -346,19 +360,16 @@ button:hover {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
 
-    /* Ensure dropdown displays properly */
     .dropdown {
         position: relative;
     }
 
-    /* Show dropdown on hover */
     .dropdown:hover .dropdown-menu {
         display: block;
     }
-
 }
 
-/* Hide hamburger button on larger screens */
+/* Hide hamburger on desktop */
 @media (min-width: 769px) {
     .hamburger {
         display: none;

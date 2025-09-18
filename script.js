@@ -38,11 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             li.classList.add("dropdown");
 
-            // FIX: use __link for parent link
+            // parent link uses __link
             let mainLink = value.__link || "#";
             li.innerHTML = `<a href="${mainLink}" class="nav-link dropdown-toggle">${key}</a>`;
 
-            // Dropdown items
             let dropdown = document.createElement("ul");
             dropdown.classList.add("dropdown-menu");
 
@@ -58,13 +57,38 @@ document.addEventListener("DOMContentLoaded", function () {
         navMenu.innerHTML += `<li class="divider"></li>`;
     }
 
+    // --- Auto-generate carousels from siteMap ---
+    function populateCarousel(listId, sectionKey) {
+        const list = document.getElementById(listId);
+        if (!list || !siteMap[sectionKey] || typeof siteMap[sectionKey] !== "object") return;
+
+        for (let [name, link] of Object.entries(siteMap[sectionKey])) {
+            if (name === "__link") continue;
+
+            const item = document.createElement("div");
+            item.classList.add("carousel-item");
+            item.innerHTML = `
+                <a href="${link}" class="card-link">
+                    <div class="card">
+                        <div class="card-content">
+                            <span>${name}</span>
+                        </div>
+                    </div>
+                </a>
+            `;
+            list.appendChild(item);
+        }
+    }
+
+    populateCarousel("project-list", "Projects");
+    populateCarousel("review-list", "Reviews");
+
     // --- Scroll Function (with looping) ---
     function setupCarousel(listId, leftBtnId, rightBtnId) {
         const list = document.getElementById(listId);
         const leftBtn = document.getElementById(leftBtnId);
         const rightBtn = document.getElementById(rightBtnId);
 
-        // If any element is missing, skip
         if (!list || !leftBtn || !rightBtn) return;
 
         const scrollAmount = 150;
@@ -86,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Setup both carousels if present
     setupCarousel("project-list", "project-left", "project-right");
     setupCarousel("review-list", "review-left", "review-right");
 
@@ -94,24 +117,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamburger = document.querySelector(".hamburger");
     hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
 
-    // Dropdown toggle (mobile only)
     document.querySelectorAll(".dropdown-toggle").forEach(link => {
         link.addEventListener("click", function (e) {
             if (window.innerWidth <= 768) {
                 const dropdownMenu = this.closest('.dropdown').querySelector('.dropdown-menu');
 
-                // If dropdown already open, allow navigation
                 if (dropdownMenu.classList.contains('show')) {
-                    return; // let the link navigate
+                    return; // allow navigation
                 }
 
-                e.preventDefault(); // stop immediate navigation
+                e.preventDefault(); 
                 dropdownMenu.classList.toggle('show');
             }
         });
     });
 
-    // Close menu on outside click
     document.addEventListener("click", (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             navMenu.classList.remove("active");
@@ -119,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // --- Footer Year (if present) ---
+    // --- Footer Year ---
     const yearEl = document.getElementById("year");
     if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
